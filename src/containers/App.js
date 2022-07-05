@@ -16,6 +16,7 @@ import HomePage from './HomePage/HomePage.js';
 import CustomScrollbars from "../components/CustomScrollbars";
 import DetailDoctor from './Patient/Doctor/DetailDoctor';
 import Doctor from '../routes/Doctor';
+import admin from '../routes/admin'; // tu tao
 class App extends Component {
 
     handlePersistorState = () => {
@@ -52,6 +53,8 @@ class App extends Component {
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)} />
+                                {/* // tu tao */}
+                                <Route path={'/admin/'} component={userIsAuthenticated(admin)} /> 
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                                 <Route path={path.DETAIL_DOCTOR} component={DetailDoctor}/> 
 

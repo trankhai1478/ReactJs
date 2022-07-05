@@ -135,14 +135,16 @@ export const fetchAllUserStart= () => {
         try{                                  
             let res =await getAllUsers("ALL");
          
-            if(res && res.errCode===0){
-                
+            if(res && res.errCode===0){   
+                     
                 dispatch(fetchAllUsersSuccess(res.users.reverse()))
+
             }else{
+                toast.error("Fetch all the user error ! ");
                 dispatch(fetchAllUserFailed());
             }
        }catch(e){
-        
+                toast.error("Fetch all the user error ! ");
                 dispatch(fetchAllUserFailed());
                 console.log('fetchAllUserFailed: ', e)
             
