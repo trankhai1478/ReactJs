@@ -9,7 +9,7 @@ import DatePicker  from '../../../components/Input/DatePicker';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
-
+import {saveBulkScheduleDoctor} from '../../../services/userService';
 class ManageSchedulead extends Component {
     constructor(props){
         super(props);
@@ -22,15 +22,18 @@ class ManageSchedulead extends Component {
         }
     }
     componentDidMount(){
-        this.props.fetchAllDoctors();
+        this.props.fetchUserRedux();
         this.props.fetchAllScheduleTime();
     }  
     componentDidUpdate(prevProps,prevState, snapshot){
-        if(prevProps.allDoctors !== this.props.allDoctors){
-            let dataSelect = this.buidDataInputSelect(this.props.allDoctors)
+        //let dataSelect = this.fetchUserRedux(this.userInfo.id)
+      
+        if(prevProps.userInfo !== this.props.userInfo){
+            let dataSelect = this.fetchUserRedux(this.props)
             this.setState({
                 listDoctors: dataSelect
             })
+           
            }
          if(prevProps.allScheduleTime !== this.props.allScheduleTime){
          
@@ -68,8 +71,8 @@ class ManageSchedulead extends Component {
         }
         return result;
     } 
-    handleChangeSelect = async (selectedOption) => {
-        this.setState({ selectedDoctor: selectedOption });
+    handleChangeSelect = async (userInfo) => {
+        this.setState({ selectedDoctor: userInfo  });
        
     }
     handleOnChangeDatePicker =(date)=>{
@@ -93,7 +96,7 @@ class ManageSchedulead extends Component {
            
         }
     }
-    handleSaveSchedule = () =>{
+    handleSaveSchedule =async () =>{
         let {rangeTime,selectedDoctor, currentDate} = this.state;
         let {userInfo}= this.props;
         let result=[];
@@ -102,8 +105,8 @@ class ManageSchedulead extends Component {
             return;
         }
       
-        let formatedDate =  moment(currentDate).format(dateFormat.SEND_TO_SERVER)
-      
+        
+        let formatedDate =  new Date(currentDate).getTime();
         
         if(rangeTime && rangeTime.length > 0){
             let selectTime = rangeTime.filter(item =>item.isSelected===true);
@@ -111,9 +114,9 @@ class ManageSchedulead extends Component {
             if(selectTime && selectTime.length >0){
                 selectTime.map(schedule=>{
                     let object = {};
-                    object.userInfo  =userInfo.value ; //trong thư viện select trả ra value và lable
+                    object.doctorId  =userInfo.id ; //trong thư viện select trả ra value và lable
                     object.date  = formatedDate; 
-                    object.time = schedule.keyMap;
+                    object.timeType = schedule.keyMap;
                     result.push(object);
                 })
                 
@@ -122,6 +125,11 @@ class ManageSchedulead extends Component {
                 return;
             }
         }
+        let res = await saveBulkScheduleDoctor({
+            arrSchedule: result,
+            doctorId:userInfo.id,
+            formatedDate: formatedDate
+        });
         console.log('check result',result)
     }
     
@@ -200,7 +208,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllDoctors:()=>dispatch(actions.fetchAllDoctors()),
+        fetchUserRedux: ()=> dispatch(actions.fetchAllUserStart()),
         fetchAllScheduleTime:()=>dispatch(actions.fetchAllScheduleTime()),
     };
 };
