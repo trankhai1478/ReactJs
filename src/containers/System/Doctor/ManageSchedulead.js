@@ -131,6 +131,12 @@ class ManageSchedulead extends Component {
             formatedDate: formatedDate
         });
         console.log('check result',result)
+        if(res && res.errCode === 0){
+            toast.success("Save Bulk Schedule Doctor Success!");
+        }else{
+            toast.error("Save Bulk Schedule Doctor Failed!");
+            console.log("check Save Bulk Schedule Doctor ",res)
+        }
     }
     
     render() {
@@ -138,6 +144,7 @@ class ManageSchedulead extends Component {
         let {rangeTime} = this.state;
         let {language} = this.props;
         let {userInfo}= this.props;
+        let yesterday = new Date(new Date().setDate(new Date().getDate()-1));
         console.log('kkk', this.props.userInfo)
         console.log("check state rangtime",rangeTime)
         return (
@@ -160,7 +167,7 @@ class ManageSchedulead extends Component {
                             onChange={this.handleOnChangeDatePicker}
                             className='form-control'
                             value={this.state.currentDate}  
-                            minDate={new Date()}    // lấy ngày hiện tại, tắt chọn ngày quá khứ                
+                            minDate={yesterday}     // lấy ngày hiện tại, tắt chọn ngày quá khứ                
                             />
                         </div>
                         <div className='col-12 pick-hour-container'>
