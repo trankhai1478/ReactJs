@@ -78,6 +78,15 @@
             "choose":"Choose ",
             "book-free":" and book (free)"
         }
+    },
+    "admin":{
+        "manage-doctor":{
+            "title": "Create doctor information",
+            "select-doctor":"Select doctor",
+            "infor-doctor":"Introductory information:",
+            "save-infor":"Save infor",
+            "create-infor": "Create infor"
+        }
     }
 
 }
