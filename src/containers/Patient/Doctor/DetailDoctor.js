@@ -5,6 +5,7 @@ import './DetailDoctor.scss';
 import {getDetailInforDoctor} from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorExtraInfor from './DoctorExtraInfor';
 class DetailDoctor extends Component {
    constructor(props){
         super(props);
@@ -39,8 +40,8 @@ class DetailDoctor extends Component {
         let {detailDoctor} = this.state;
         let nameVi ='', nameEn='';
         if(detailDoctor && detailDoctor.positionData){
-             nameVi = `${detailDoctor.positionData.valueVi},${detailDoctor.firstName} ${detailDoctor.lastName}`;
-             nameEn = `${detailDoctor.positionData.valueEn},${detailDoctor.lastName} ${detailDoctor.firstName}`;
+             nameVi = `${detailDoctor.positionData.valueVi},${detailDoctor.lastName} ${detailDoctor.firstName}`;
+             nameEn = `${detailDoctor.positionData.valueEn},${detailDoctor.firstName} ${detailDoctor.lastName}`;
         
         }
         
@@ -75,7 +76,9 @@ class DetailDoctor extends Component {
                                     />
                                 </div>
                                 <div className='content-right'>
-                                    
+                                    <DoctorExtraInfor
+                                         doctorIdFromParent={this.state.currentDoctorId}
+                                    />
                                 </div>
                     </div>
                      <div className='detail-infor-doctor'>
