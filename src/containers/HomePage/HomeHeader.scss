@@ -150,7 +150,10 @@
             display: flex;
             gap: 50px;
             justify-content: center;
-
+            .options-child:hover{
+                transform: scale(1.25);
+                transition-duration: 0.5s;
+            }
             .options-child{
              
                 .icon-child{

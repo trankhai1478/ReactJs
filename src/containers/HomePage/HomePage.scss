@@ -61,12 +61,20 @@
                 &.section-medical-facility{
                     background-image: url('../../assets/cosoyte/benh-vien-thu-cuc.jpg');
                 }
+                &.section-outstanding-doctor:hover{
+                    //background-image: url('../../assets/outstandingdoctor/benh-vien-viet-duc.jpg');
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    transform: scale(1.25);
+                    transition-duration: 0.5s;
+                }
                 &.section-outstanding-doctor{
                     //background-image: url('../../assets/outstandingdoctor/benh-vien-viet-duc.jpg');
                     width: 120px;
                     height: 120px;
                     border-radius: 50%;
-
+                    
                 }
                 &.section-handbook{
                     background-image: url('../../assets/handbook/nha-khoa.jpg');
