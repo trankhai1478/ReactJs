@@ -57,12 +57,28 @@ const postPatientBookAppointment =(data)=>{
 const postVerifyBookAppointment =(data)=>{
     return axios.post('/api/verify-book-appointment',data)
 }
+const createNewSpecialty =(data)=>{
+    return axios.post('/api/create-new-specialty',data)
+}
+const getAllSpecialty =(inputId)=>{
+    return axios.get(`/api/get-all-specialty?id=${inputId}`)
+}
+const deleteSpecialtyService=(SpecialtyId)=>{
+    // return axios.delete('api/delete-user',{id: userId})
+    return axios.delete('/api/delete-specialty',{
+  
+    data:{
+        id:SpecialtyId
+    }
+    });
 
+}
 export{handleLoginApi,getAllUsers,createNewUserService,
     deleteUserService,editUserService,getAllCodeService,
     getTopDoctorHomeService,getAllDoctors,
     saveDetailDoctorService,getDetailInforDoctor,
     saveBulkScheduleDoctor,getScheduleDoctorByDate,
     getExtraInforDoctorById,getProfileDoctorById,
-    postPatientBookAppointment,postVerifyBookAppointment
+    postPatientBookAppointment,postVerifyBookAppointment,
+    createNewSpecialty,getAllSpecialty,deleteSpecialtyService
 }

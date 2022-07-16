@@ -33,7 +33,7 @@ class OutsandingDoctor extends Component {
        
         let arrDoctors = this.state.arrDoctors; 
         let {language} = this.props;
-        console.log('gi vay troi',arrDoctors)
+        // console.log('gi vay troi',arrDoctors)
         arrDoctors = arrDoctors.concat(arrDoctors).concat(arrDoctors)
         return (
          
