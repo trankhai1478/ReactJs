@@ -1,6 +1,7 @@
 import actionTypes from './actionTypes';
 import { getAllCodeService,createNewUserService, getAllUsers,deleteUserService,editUserService,
-    getTopDoctorHomeService, getAllDoctors,saveDetailDoctorService,getAllSpecialty,deleteSpecialtyService } from '../../services/userService';
+    getTopDoctorHomeService, getAllDoctors,saveDetailDoctorService,
+    getAllSpecialty,deleteSpecialtyService } from '../../services/userService';
 import { toast } from 'react-toastify';
 // export const fetchGenderStart= () => ({
 //     type: actionTypes.FETCH_GENDER_START
@@ -342,14 +343,18 @@ export const getRequiredDoctorInfor= () => {
             let resPrice =await getAllCodeService('PRICE');
             let resPayment =await getAllCodeService('PAYMENT');
             let resProvince =await getAllCodeService('PROVINCE');
+            let resSpecialty = await getAllSpecialty();
+
           
             if(resPrice && resPrice.errCode===0 && 
                 resPayment && resPayment.errCode ===0 &&
-                resProvince && resProvince.errCode ===0) {       
+                resProvince && resProvince.errCode ===0 &&
+                resSpecialty && resSpecialty.errCode ===0) {       
                     let data = {
                         resPrice: resPrice.data,
                         resPayment: resPayment.data,
-                        resProvince: resProvince.data
+                        resProvince: resProvince.data,
+                        resSpecialty: resSpecialty.data
                     }       
                 dispatch (fetchAllRequiredDoctorInforSuccess(data))
             }else{
