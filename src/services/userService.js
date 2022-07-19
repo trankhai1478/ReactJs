@@ -73,6 +73,9 @@ const deleteSpecialtyService=(SpecialtyId)=>{
     });
 
 }
+const getAllDetailSpecialtyById =(data)=>{
+    return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`)
+}
 export{handleLoginApi,getAllUsers,createNewUserService,
     deleteUserService,editUserService,getAllCodeService,
     getTopDoctorHomeService,getAllDoctors,
@@ -80,5 +83,6 @@ export{handleLoginApi,getAllUsers,createNewUserService,
     saveBulkScheduleDoctor,getScheduleDoctorByDate,
     getExtraInforDoctorById,getProfileDoctorById,
     postPatientBookAppointment,postVerifyBookAppointment,
-    createNewSpecialty,getAllSpecialty,deleteSpecialtyService
+    createNewSpecialty,getAllSpecialty,deleteSpecialtyService,
+    getAllDetailSpecialtyById
 }
