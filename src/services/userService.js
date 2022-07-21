@@ -99,7 +99,9 @@ const getAllClinic =(inputId)=>{
 const editClinicService=(inputData)=>{
     return axios.put('/api/edit-clinic',inputData);       
 }
-
+const getAllDetailClinicById =(data)=>{
+    return axios.get(`/api/get-detail-clinic-by-id?id=${data.id}`)
+}
 export{handleLoginApi,getAllUsers,createNewUserService,
     deleteUserService,editUserService,getAllCodeService,
     getTopDoctorHomeService,getAllDoctors,
@@ -110,5 +112,5 @@ export{handleLoginApi,getAllUsers,createNewUserService,
     createNewSpecialty,getAllSpecialty,deleteSpecialtyService,
     getAllDetailSpecialtyById,editSpecialtyService,
     createNewClinic,deleteClinicService,getAllClinic,
-    editClinicService,
+    editClinicService,getAllDetailClinicById
 }
