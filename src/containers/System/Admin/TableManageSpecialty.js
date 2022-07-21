@@ -29,6 +29,9 @@ class TableManageSpecialty extends Component {
          this.props.deleteSp(SpecialtyId.id)
         
     }
+    handleEditUser = (user) =>{
+        this.props.handleEditUserFromParentKey(user)
+    }
     render() {
         let arrSpecialty = this.state.SpecialtyRedux;    
         //console.log('kk',this.state.SpecialtyRedux)

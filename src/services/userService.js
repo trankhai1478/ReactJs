@@ -76,6 +76,13 @@ const deleteSpecialtyService=(SpecialtyId)=>{
 const getAllDetailSpecialtyById =(data)=>{
     return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`)
 }
+const editSpecialtyService=(inputData)=>{
+    return axios.put('/api/edit-specialty',inputData);       
+}
+////////////////////////phong kham clinic
+const createNewClinic=(data)=>{
+    return axios.post('/api/create-new-clinic',data)
+}
 export{handleLoginApi,getAllUsers,createNewUserService,
     deleteUserService,editUserService,getAllCodeService,
     getTopDoctorHomeService,getAllDoctors,
@@ -84,5 +91,6 @@ export{handleLoginApi,getAllUsers,createNewUserService,
     getExtraInforDoctorById,getProfileDoctorById,
     postPatientBookAppointment,postVerifyBookAppointment,
     createNewSpecialty,getAllSpecialty,deleteSpecialtyService,
-    getAllDetailSpecialtyById
+    getAllDetailSpecialtyById,editSpecialtyService,
+    createNewClinic,
 }

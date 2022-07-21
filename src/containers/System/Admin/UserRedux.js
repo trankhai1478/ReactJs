@@ -192,9 +192,11 @@ class UserRedux extends Component {
             userEditId: user.id
 
         })
+        
     }
     render() {
-       
+        let data = this.state;
+       console.log('kkkkkkkk',data)
         let genders= this.state.genderArr;
         let roles= this.state.roleArr;
         let positions=this.state.positionArr;
