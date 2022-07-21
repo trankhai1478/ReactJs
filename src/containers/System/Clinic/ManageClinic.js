@@ -9,7 +9,7 @@ import 'react-image-lightbox/style.css';
 import {LANGUAGES,CommonUtils,CRUD_ACTIONS }from "../../../utils";
 import { createNewClinic} from '../../../services/userService';
 import { toast } from 'react-toastify';
-import TableManageSpecialty from '../../System/Admin/TableManageSpecialty';
+import TableManageClinic from '../../System/Admin/TableManageClinic';
 import * as actions from "../../../store/actions";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -22,7 +22,7 @@ class ManageClinic extends Component {
             imageBase64:'',
             descriptionHTML:'',
             descriptionMarkdown:'',     
-            SpecialtyEditId:'',    
+            ClinicEditId:'',    
             previewImgURL:'',   
             isOpen: false,
          
@@ -81,38 +81,40 @@ class ManageClinic extends Component {
                 descriptionHTML:'',
                 descriptionMarkdown:'',   
             })
-            this.props.fetchSpecialyRedux();
+            this.props.fetchClinicRedux();
         }else{
             toast.error("Add new clinic Error!");
             console.log("check res", res);
         }
         
     }
-    handleEditUserFromParent=(user)=>{
+    handleEditClinicFromParent=(clinic)=>{
         let imageBase64 ='';
-        if(user.image){
-            imageBase64 = new Buffer(user.image, 'base64').toString('binary');
+        if(clinic.image){
+            imageBase64 = new Buffer(clinic.image, 'base64').toString('binary');
         }
         this.setState({
             
-            name: user.name,
+            name: clinic.name,
+            address:clinic.address,
             imageBase64:'' ,
-            descriptionHTML: user.descriptionHTML,
-            descriptionMarkdown: user.descriptionMarkdown,
-            previewImgURL:user.image,
+            descriptionHTML: clinic.descriptionHTML,
+            descriptionMarkdown: clinic.descriptionMarkdown,
+            previewImgURL:clinic.image,
             action: CRUD_ACTIONS.EDIT,
-            SpecialtyEditId: user.id
+            ClinicEditId: clinic.id
 
         })
-        console.log('user',user)
+        console.log('clinic',clinic)
     }
-    handleSaveEditSpecialty =()=>{
+    handleSaveEditClinic =()=>{
         let {action} = this.state;
         if(action === CRUD_ACTIONS.EDIT){
-            //fire redux edit user
-            this.props.fetchEditSpecialyRedux({
-            id: this.state.SpecialtyEditId,
+            //fire redux edit clinic
+            this.props.fetchEditClinicRedux({
+            id: this.state.ClinicEditId,
             name: this.state.name,
+            address:this.state.address,
             imageBase64: this.state.previewImgURL,
             descriptionHTML: this.state.descriptionHTML,
             descriptionMarkdown: this.state.descriptionMarkdown,
@@ -165,8 +167,8 @@ class ManageClinic extends Component {
                         />
                     </div>
                     <div className='col-12'>
-                        <button className='btn-save-specialty'onClick={()=>this.ManageClinichandleSaveNewClinic()}>Lưu mới</button>
-                        {/* <button className='btn-save-specialty'onClick={()=>this.handleSaveEditSpecialty()}>Lưu thay đổi</button> */}
+                        <button className='btn-save-clinic1'onClick={()=>this.ManageClinichandleSaveNewClinic()}>Lưu mới</button>
+                        <button className='btn-save-clinic2'onClick={()=>this.handleSaveEditClinic()}>Lưu thay đổi</button>
                     </div>
 
                    
@@ -179,12 +181,13 @@ class ManageClinic extends Component {
                     />
                 } 
                 <div>
-                    {/* <TableManageSpecialty
-                         handleEditUserFromParentKey={this.handleEditUserFromParent}
+                    <TableManageClinic
+                         handleEditClinicFromParentKey={this.handleEditClinicFromParent}
                          action={this.state.action}
-                    /> */}
+                    />
                    
-                </div>        
+                </div>   
+                
             </div>
         );                
     }       
@@ -198,8 +201,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchSpecialyRedux:()=> dispatch(actions.fetchAllSpecialty()),
-        fetchEditSpecialyRedux:(data)=> dispatch(actions.editSpecialty(data))
+        fetchClinicRedux:()=> dispatch(actions.fetchAllClinic()),
+        fetchEditClinicRedux:(data)=> dispatch(actions.editClinic(data))
     };
 };
 

@@ -1,7 +1,8 @@
 import actionTypes from './actionTypes';
 import { getAllCodeService,createNewUserService, getAllUsers,deleteUserService,editUserService,
     getTopDoctorHomeService, getAllDoctors,saveDetailDoctorService,
-    getAllSpecialty,deleteSpecialtyService,editSpecialtyService } from '../../services/userService';
+    getAllSpecialty,deleteSpecialtyService,editSpecialtyService,getAllClinic,deleteClinicService,
+    editClinicService } from '../../services/userService';
 import { toast } from 'react-toastify';
 // export const fetchGenderStart= () => ({
 //     type: actionTypes.FETCH_GENDER_START
@@ -467,4 +468,92 @@ export const editSpecialtySucess = () =>({
 })
 export const editSpecialtyFailed = () =>({
     type: actionTypes.EDIT_SPECIALTY_FAILED
+})
+////////////////////// phong kham 
+export const fetchAllClinic= () => {
+    
+    return async (dispatch, getState)=>{
+        try{                                  
+            let res =await getAllClinic("ALL");
+         
+            if(res && res.errCode===0){   
+                     
+                dispatch(fetchAllSClinicSuccess(res.data))
+
+            }else{
+                toast.error("Fetch all the clinic error ! ");
+                dispatch(fetchAllClinicFailed());
+            }
+       }catch(e){
+                toast.error("Fetch all the clinic error ! ");
+                dispatch(fetchAllClinicFailed());
+                console.log('fetch All Clinic Failed: ', e)
+            
+       }
+    } 
+}
+export const fetchAllSClinicSuccess= (data)=>({
+    type: actionTypes.FETCH_ALL_CLINIC_SUCCESS,
+    clinic: data
+})
+export const fetchAllClinicFailed = ()=> ({
+    type: actionTypes.FETCH_ALL_CLINIC_FAILED,
+})
+//xoa phong kham
+export const deleteClinic = (ClinicId) =>{
+    return async (dispatch, getState) => {
+        try {
+            let res = await deleteClinicService(ClinicId);
+
+            if (res && res.errCode === 0) {
+                toast.success("Delete succeed ! ");
+                dispatch(deleteClinicSucess());
+                dispatch(fetchAllClinic());
+               
+            } else {
+                toast.error("Delete  error ! ");
+               dispatch(deleteClinicFailed());
+           }
+        } catch (e) {
+            toast.error("Delete  error ! ");
+            dispatch(deleteClinicFailed());
+            
+        }
+    }
+}
+
+export const deleteClinicSucess = ()=>({
+    type: actionTypes.DELETE_CLINIC_SUCCESS
+})
+export const deleteClinicFailed = ()=>({
+    type: actionTypes.DELETE_CLINIC_FAILED
+})
+//sua phong kham 
+export const editClinic = (data) =>{
+    return async (dispatch, getState) => {
+        try {
+            let res = await editClinicService(data);
+
+            if (res && res.errCode === 0) {
+                toast.success("Update the user succeed ! ");
+                dispatch(editClinicSucess());
+                dispatch(fetchAllClinic());
+               
+            } else {
+                toast.error("Update the user error ! ");
+                dispatch(editClinicFailed());
+            }
+        } catch (e) {
+            toast.error("Update the user error ! ");
+            dispatch(editClinicFailed());
+            console.log(e);
+            
+        }
+    }
+}
+export const editClinicSucess = () =>({
+    type: actionTypes.EDIT_CLINIC_SUCCESS
+})
+export const editClinicFailed = () =>({
+    type: actionTypes.EDIT_CLINIC_FAILED
 })

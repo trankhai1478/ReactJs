@@ -29,16 +29,32 @@
                     cursor: pointer;
                 }
         }
-        .btn-save-specialty{
+        .btn-save-clinic1{
           
             border: none;
             background: orange;
             padding: 8px 5px;
             min-width: 75px;
             border-radius: 3px;
-            margin: 15px 0;
+            margin: 15px 10px;
+            &:hover{
+                background-color: aqua;
+           }
+        }
+        .btn-save-clinic2{
+         
+            border: none;
+            background: orange;
+            padding: 8px 5px;
+            min-width: 75px;
+            border-radius: 3px;
+            margin: 15px 10px;
+           &:hover{
+                background-color: aqua;
+           }
            
         }
+      
     }
   
 }
