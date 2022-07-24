@@ -102,6 +102,12 @@ const editClinicService=(inputData)=>{
 const getAllDetailClinicById =(data)=>{
     return axios.get(`/api/get-detail-clinic-by-id?id=${data.id}`)
 }
+const getAllPatientForDoctor =(data)=>{
+    return axios.get(`/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`)
+}
+const postsendRemedy=(data)=>{
+    return axios.post('/api/send-remedy',data)
+}
 export{handleLoginApi,getAllUsers,createNewUserService,
     deleteUserService,editUserService,getAllCodeService,
     getTopDoctorHomeService,getAllDoctors,
@@ -112,5 +118,6 @@ export{handleLoginApi,getAllUsers,createNewUserService,
     createNewSpecialty,getAllSpecialty,deleteSpecialtyService,
     getAllDetailSpecialtyById,editSpecialtyService,
     createNewClinic,deleteClinicService,getAllClinic,
-    editClinicService,getAllDetailClinicById
+    editClinicService,getAllDetailClinicById,
+    getAllPatientForDoctor,postsendRemedy
 }
